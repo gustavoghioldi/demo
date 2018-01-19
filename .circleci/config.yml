@@ -5,6 +5,7 @@ jobs:
     machine:
       java:
         version: oraclejdk8
+    working_directory: /tmp/my-project
     steps:
       - checkout
       - run:
