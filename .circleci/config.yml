@@ -1,6 +1,7 @@
 version: 2
 jobs:
-  maven-jobs:
+  #maven-jobs:
+  build: 
     machine:
       java:
         version: oraclejdk8
