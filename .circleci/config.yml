@@ -10,6 +10,8 @@ jobs:
       - run:
           name: test
           command: mvn test
+      - run: pwd
       - run:
           name: package
           command: mvn package
+      
