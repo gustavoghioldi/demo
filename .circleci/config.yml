@@ -13,7 +13,8 @@ jobs:
       - run:
           name: package
           command: mvn package
-      
+      - run: cd target
+      - run: ls
       - persist_to_workspace:
           root: /tmp/my-project/target
           path: app.jar
