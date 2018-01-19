@@ -26,10 +26,10 @@ jobs:
 
 workflows:
   version: 2
-    mvn-dock:
-      jobs:
-        - maven-jobs
-        - docker-jobs:
+  mvn-dock:
+    jobs:
+      - maven-jobs
+      - docker-jobs:
           requires:
             - maven-jobs
 
