@@ -33,7 +33,8 @@ jobs:
       - run: pwd
       - run: ls target
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-      - run: docker build -t gustavoghioldi/demo:latest /tmp/my-project/target/.
+      - run: docker build -t gustavoghioldi/democi:latest /tmp/my-project/target/.
+      - run: docker push gustavoghioldi/democi:latest
 
 workflows:
   version: 2
