@@ -7,8 +7,8 @@ jobs:
         version: oraclejdk8
     steps:
       - run:
-        name: test
-        command: mvn test
+          name: test
+          command: mvn test
       - run:
-        name: package
-        command: mvn package
+          name: package
+          command: mvn package
