@@ -1,7 +1,7 @@
 version: 2
 jobs:
   #maven-jobs:
-  build: 
+  mavenize: 
     machine:
       java:
         version: oraclejdk8
@@ -15,5 +15,24 @@ jobs:
       - run:
           name: package
           command: mvn package
-      - run: ls 
+      - run: ls
+  
+  dockerize:
+    machine:
+      java:
+        version: oraclejdk8
+    working_directory: /tmp/my-project/target
+    steps:
+      - run: docker info
+
+workflows:
+version: 2
+  mvn-dock:
+    - mavenize
+    - dockerize:
+        requires:
+          - mavenize
+
+
+
       
