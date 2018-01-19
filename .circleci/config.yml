@@ -13,8 +13,9 @@ jobs:
       - run:
           name: package
           command: mvn package
+      
       - persist_to_workspace:
-          root: workspace
+          root: /tmp/my-project/target
           path: app.jar
   
   docker-jobs:
