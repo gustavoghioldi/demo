@@ -1,7 +1,6 @@
 version: 2
 jobs:
-  #maven-jobs:
-  mavenize: 
+  maven-jobs: 
     machine:
       java:
         version: oraclejdk8
@@ -17,7 +16,7 @@ jobs:
           command: mvn package
       - run: ls
   
-  dockerize:
+  docker-jobs:
     machine:
       java:
         version: oraclejdk8
@@ -28,10 +27,10 @@ jobs:
 workflows:
 version: 2
   mvn-dock:
-    - mavenize
-    - dockerize:
+    - maven-jobs
+    - docker-jobs:
         requires:
-          - mavenize
+          - maven-jobs
 
 
 
