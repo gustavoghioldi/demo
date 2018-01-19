@@ -6,6 +6,7 @@ jobs:
       java:
         version: oraclejdk8
     steps:
+      - checkout
       - run:
           name: test
           command: mvn test
