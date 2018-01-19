@@ -13,10 +13,14 @@ jobs:
       - run:
           name: package
           command: mvn package
+      - run: ls
+      - run: cp Dockerfile /tmp/my-project/target/
       - run: ls target
       - persist_to_workspace:
           root: /tmp/my-project/target
-          paths: app.jar
+          paths: 
+            - app.jar
+            - Dockerfile
   
   docker-jobs:
     machine:
@@ -25,10 +29,11 @@ jobs:
     working_directory: /tmp/my-project
     steps:
       - attach_workspace:
-          at: workspace
+          at: target
       - run: pwd
-      - run: ls workspace
-      - run: docker info
+      - run: ls target
+      - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+      - run: docker build -t gustavoghioldi/demo:latest ./workspace/.
 
 workflows:
   version: 2
