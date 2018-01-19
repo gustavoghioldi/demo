@@ -25,13 +25,13 @@ jobs:
       - run: docker info
 
 workflows:
-version: 2
-  mvn-dock:
-    jobs:
-      - maven-jobs
-      - docker-jobs:
-        requires:
-          - maven-jobs
+  version: 2
+    mvn-dock:
+      jobs:
+        - maven-jobs
+        - docker-jobs:
+          requires:
+            - maven-jobs
 
 
 
