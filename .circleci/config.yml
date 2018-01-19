@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  maven-jobs:
+    machine:
+      java:
+        version: oraclejdk8
+    steps:
+      - run:
+        name: test
+        command: mvn test
+      - run:
+        name: package
+        command: mvn package
