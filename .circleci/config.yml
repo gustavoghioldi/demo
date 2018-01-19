@@ -22,6 +22,8 @@ jobs:
         version: oraclejdk8
     working_directory: /tmp/my-project/target
     steps:
+      - run: pwd
+      - run: ls
       - run: docker info
 
 workflows:
