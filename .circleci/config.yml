@@ -10,18 +10,21 @@ jobs:
       - run:
           name: test
           command: mvn test
-      - run: pwd
       - run:
           name: package
           command: mvn package
-      - run: ls
+      - persist_to_workspace:
+          root: workspace
+          path: app.jar
   
   docker-jobs:
     machine:
       java:
         version: oraclejdk8
-    working_directory: /tmp/my-project/target
+    working_directory: /tmp/my-project
     steps:
+      - attach_workspace:
+          at: workspace
       - run: pwd
       - run: ls
       - run: docker info
