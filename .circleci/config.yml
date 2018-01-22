@@ -36,6 +36,7 @@ jobs:
       - run: docker build -t gustavoghioldi/democi:latest /tmp/my-project/target/.
       - run: docker push gustavoghioldi/democi:latest
 
+
 workflows:
   version: 2
   mvn-dock:
