@@ -47,7 +47,7 @@ jobs:
             --invocation-type RequestResponse 
             --function-name swarm-ci-deploy 
             --region us-east-1 
-            --payload "{\"name\":\"democi\"}" output.txt
+            --payload "{\"democi\":{\"name\":\"democi\"}}" output.txt
       - run: cat output.txt
 
 
