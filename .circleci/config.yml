@@ -48,7 +48,7 @@ jobs:
     steps:
       - run: echo "deploy-jobs"
       - run: echo "upload cluster_deploy.json"
-      
+
 workflows:
   version: 2
   mvn-dock:
@@ -57,7 +57,7 @@ workflows:
       - docker-jobs:
           requires:
             - maven-jobs
-      - deploy-jobs
+      - deploy-jobs:
           requires:
             - docker-jobs
 
