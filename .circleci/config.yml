@@ -16,6 +16,7 @@ jobs:
       - run: ls
       - run: cp Dockerfile /tmp/my-project/target/
       - run: cp cluster_deploy.json /tmp/my-project/target/
+      - run: cp .env /tmp/my-project/target/
       - run: ls target
       - persist_to_workspace:
           root: /tmp/my-project/target
@@ -23,6 +24,7 @@ jobs:
             - app.jar
             - Dockerfile
             - cluster_deploy.json
+            - .env
   
   docker-jobs:
     machine:
@@ -43,12 +45,14 @@ jobs:
       java:
         version: oraclejdk8
     working_directory: /tmp/my-project
+    environment:
+      $DEPLOY_ENV=$(cat /tmp/my-project/target/cluster_deploy.json | jq '.')
     steps:
       - attach_workspace:
           at: target
       - run: ls target
-      - run: cat /tmp/my-project/target/cluster_deploy.json
-      
+      - run: echo DEPLOY_ENV
+
 
 workflows:
   version: 2
