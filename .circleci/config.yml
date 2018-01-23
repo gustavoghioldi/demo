@@ -30,8 +30,7 @@ jobs:
         version: oraclejdk8
     working_directory: /tmp/my-project
     steps:
-      - attach_workspace:
-          at: target
+      - checkout
       - run: pwd
       - run: ls target
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
