@@ -15,16 +15,12 @@ jobs:
           command: mvn package
       - run: ls
       - run: cp Dockerfile /tmp/my-project/target/
-      - run: cp cluster_deploy.json /tmp/my-project/target/
-      - run: cp .env /tmp/my-project/target/
       - run: ls target
       - persist_to_workspace:
           root: /tmp/my-project/target
           paths: 
             - app.jar
             - Dockerfile
-            - cluster_deploy.json
-            - .env
   
   docker-jobs:
     machine:
@@ -44,14 +40,14 @@ jobs:
     machine:
       java:
         version: oraclejdk8
-    working_directory: /tmp/my-project
-    environment:
-      $DEPLOY_ENV=$(cat /tmp/my-project/target/cluster_deploy.json | jq '.')
     steps:
-      - attach_workspace:
-          at: target
-      - run: ls target
-      - run: echo DEPLOY_ENV
+      - checkout
+      - run: aws lambda invoke 
+            --invocation-type RequestResponse 
+            --function-name swarm-ci-deploy 
+            --region us-east-1 
+            --payload "{\"name\":\"democi\"}" output.txt
+      - run: cat output.txt
 
 
 workflows:
