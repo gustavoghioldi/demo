@@ -30,7 +30,8 @@ jobs:
         version: oraclejdk8
     working_directory: /tmp/my-project
     steps:
-      - checkout
+      - attach_workspace:
+          at: target
       - run: pwd
       - run: ls target
       - run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
@@ -45,10 +46,8 @@ jobs:
     steps:
       - attach_workspace:
           at: target
-    steps:
-      - run: DEPLOY_VARS=$(cat /tmp/my-project/cluster_deploy.json)
-      - run: echo $DEPLOY_VARS | jq '.'
-
+      - run: DEPLOY_VARS = $(cat /tmp/my-project/target/cluster_deploy.json)
+      - run: echo $DEPLOY_VARS
 workflows:
   version: 2
   mvn-dock:
@@ -57,7 +56,7 @@ workflows:
       - docker-jobs:
           requires:
             - maven-jobs
-      - deploy-jobs:
+      - deploy-jobs
           requires:
             - docker-jobs
 
