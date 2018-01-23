@@ -22,7 +22,6 @@ jobs:
           paths: 
             - app.jar
             - Dockerfile
-            - cluster_deploy.json
   
   docker-jobs:
     machine:
@@ -38,7 +37,7 @@ jobs:
       - run: docker build -t gustavoghioldi/democi:latest /tmp/my-project/target/.
       - run: docker push gustavoghioldi/democi:latest
   
-  deploy-job:
+  deploy-jobs:
     machine:
       java:
         version: oraclejdk8
@@ -47,24 +46,9 @@ jobs:
       - attach_workspace:
           at: target
     steps:
-      - run: |
-          function readJson {  \
-            UNAMESTR=`uname` \
-            if [[ "$UNAMESTR" == 'Linux' ]]; then \
-            SED_EXTENDED='-r' \
-            elif [[ "$UNAMESTR" == 'Darwin' ]]; then \
-            SED_EXTENDED='-E' \
-            fi; \
-            VALUE=`grep -m 1 "\"${2}\"" ${1} | sed ${SED_EXTENDED} 's/^ *//;s/.*: *"//;s/",?//'` \
-            if [ ! "$VALUE" ]; then \
-            echo "Error: Cannot find \"${2}\" in ${1}" >&2; \
-            exit 1; \
-            else \
-            echo $VALUE ; \
-            fi; }
-      - run: NAME=`readJson target/cluster_deploy.json name` || exit 1;  
-      - run: echo $NAME
-
+      - run: echo "deploy-jobs"
+      - run: echo "upload cluster_deploy.json"
+      
 workflows:
   version: 2
   mvn-dock:
