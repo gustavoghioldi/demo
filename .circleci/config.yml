@@ -46,6 +46,7 @@ jobs:
     steps:
       - attach_workspace:
           at: target
+      - run: ls target
       - run: DEPLOY_VARS=$(cat /tmp/my-project/target/cluster_deploy.json)
       - run: echo $DEPLOY_VARS
       - run: echo $DEPLOY_VARS | jq '.'
