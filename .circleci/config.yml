@@ -56,7 +56,7 @@ workflows:
       - docker-jobs:
           requires:
             - maven-jobs
-      - deploy-jobs
+      - deploy-jobs:
           requires:
             - docker-jobs
 
