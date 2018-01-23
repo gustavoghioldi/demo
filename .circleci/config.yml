@@ -22,6 +22,7 @@ jobs:
           paths: 
             - app.jar
             - Dockerfile
+            - cluster_deploy.json
   
   docker-jobs:
     machine:
@@ -46,8 +47,8 @@ jobs:
       - attach_workspace:
           at: target
     steps:
-      - run: echo "deploy-jobs"
-      - run: echo "upload cluster_deploy.json"
+      - run: DEPLOY_VARS=$(cat /tmp/my-project/cluster_deploy.json)
+      - run: echo $DEPLOY_VARS | jq '.'
 
 workflows:
   version: 2
