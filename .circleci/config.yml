@@ -47,7 +47,7 @@ jobs:
       - attach_workspace:
           at: target
       - run: ls target
-      - run: foo=HOLA MUNDO
+      - run: foo="HOLA MUNDO"
       - run: echo $foo
       - run: cat /tmp/my-project/target/cluster_deploy.json
       - run: MY_DEPLOY_VARS=$(cat /tmp/my-project/target/cluster_deploy.json)
